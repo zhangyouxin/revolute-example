@@ -1,0 +1,14 @@
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  width: auto !important;
+}
+
+@media screen and (min-width: 768px) {
+  .banner-title {
+    font-size: clamp(3rem, 2.55rem + 0.82vw, 3.75rem);
+  }
+}

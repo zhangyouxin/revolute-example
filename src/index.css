@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+:root {
+  font-family: Inter, sans-serif;
+  margin: 0;
+  --swiper-navigation-color: transparent;
+}
+
+
