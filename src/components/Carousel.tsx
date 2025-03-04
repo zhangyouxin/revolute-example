@@ -1,9 +1,10 @@
 import { Card, CardProps } from "./Card";
 import bgIcon1 from "../assets/bg1.png";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay, Navigation } from "swiper/modules";
+import { Autoplay, Navigation } from "swiper/modules";
 import { useSceenInfo } from "../hooks/useSceenInfo";
 import { useState } from "react";
+import { Pagination } from "./Pagination";
 
 const CardsConfig: CardProps[] = new Array(10).fill(null).map((_, index) => ({
   title: `$ ${index}00`,
@@ -21,18 +22,14 @@ export const Carousel = () => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
 
   return (
-    <div className="w-[calc(100vw-2rem)] overflow-hidden mx-[1rem]">
+    <div className="flex flex-col items-center gap-4 w-[calc(100vw-2rem)] overflow-hidden mx-[1rem]">
       <Swiper
         className="w-full md:max-w-[60rem] lg:max-w-[70rem]"
-        loop
         slidesPerView={"auto"}
         centeredSlides={isMobile ? false : true}
         spaceBetween={50}
-        pagination={{
-          clickable: true,
-        }}
         navigation={true}
-        modules={[Autoplay, Pagination, Navigation]}
+        modules={[Autoplay, Navigation]}
         autoplay={{
           delay: 1500,
           disableOnInteraction: true,
@@ -40,6 +37,7 @@ export const Carousel = () => {
           waitForTransition: true,
         }}
         onSlideChange={(e) => {
+          console.log('onSlideChange', e.activeIndex);
           setActiveIndex(e.activeIndex);
         }}
       >
@@ -49,6 +47,11 @@ export const Carousel = () => {
           </SwiperSlide>
         ))}
       </Swiper>
+
+      <Pagination
+        page={activeIndex}
+        totalPages={CardsConfig.length}
+      />
     </div>
   );
 };
